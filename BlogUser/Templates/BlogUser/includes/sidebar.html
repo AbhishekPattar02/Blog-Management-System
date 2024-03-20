@@ -1,0 +1,18 @@
+{% load static %}
+
+<div class="contact-form bg-light mb-3" style="padding: 30px;">
+<div class="text-center mb-4">
+    {% if user.profile_pic  %}
+    <img class="img-fluid rounded-circle dropdown-toggle" src="{{ user.profile_pic.url }}" id ="dropdownMenuButton" data-toggle="dropdown" style="width: 150px; height: 150px;" alt="Profile Image">
+    {% else %}
+    <img class="img-fluid rounded-circle dropdown-toggle" src="{% static 'img/user_profile.jpg' %}" id ="dropdownMenuButton" data-toggle="dropdown" style="width: 150px; height: 150px;" alt="Profile Image">
+    {% endif %}
+</div>
+<div class="navbar-nav mr-auto py-0">
+    <a href="{% url 'Blog_Home' %}" class="nav-item nav-link {% if request.path == "/" %}active{% endif %}">Home</a>
+    <a href="{% url 'View-Profile' %}" class="nav-item nav-link {% if request.path == "/Profile" %}active{% endif %}">MY Profile</a>
+    <a href="{% url 'Add-Blog' %}" class="nav-item nav-link {% if request.path == "/Add_Blog" %}active{% endif %}">Add Blog</a>
+    <a href="{% url 'View-Blog' %}" class="nav-item nav-link {% if request.path == "/View_Blog" %}active{% endif %}">View Blog</a>
+    <a href="{% url 'User-Logout' %}" class="nav-item nav-link {% if request.path == "/Logout" %}active{% endif %}">Logout</a>
+</div>
+</div>

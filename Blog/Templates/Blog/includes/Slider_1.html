@@ -1,0 +1,12 @@
+{% load static %}
+<div class="position-relative overflow-hidden" style="height: 300px;">
+    <img class="img-fluid w-100 h-100" src="{{i.header_image.url}}" style="object-fit: cover;">
+    <div class="overlay">
+        <div class="mb-1" style="font-size: 13px;">
+            <a class="text-white" href="{% url 'Blog-List' i.category.slug %}">{{i.category}}</a>
+            <span class="px-1 text-white">/</span>
+            <a class="text-white">{{i.created_at|date:"d M Y"}}</a>
+        </div>
+        <a class="h4 m-0 text-white" href="{% url 'Blog-Details' i.slug %}">{{i.title|slice:":20"}}...</a>
+    </div>
+</div>

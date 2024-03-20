@@ -1,0 +1,57 @@
+{% extends "Blog_Base.html" %}
+
+{% block title %}
+CLASSROOM | SEARCH RESULTS
+{% endblock title %}
+
+{% block content %}
+{% load static %}
+<!-- Breadcrumb Start -->
+<div class="container-fluid">
+    <div class="container">
+        <nav class="breadcrumb bg-transparent m-0 p-0">
+            <a class="breadcrumb-item" href="{% url 'Blog_Home' %}">Home</a>
+            <span class="breadcrumb-item active">Search Results</span>
+        </nav>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+
+<!-- News With Sidebar Start -->
+<div class="container-fluid py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
+                            <h3 class="m-0">Search Results</h3>
+                        </div>
+                    </div>
+                    {% if Blogs %}
+                    {% for i in Blogs %}
+                    {% include "Blog/includes/Box.html" %}
+                    {% endfor %}
+                    {% else %}
+                    <div class="col-12">
+                        <div class="d-flex align-items-center justify-content-between text-center py-2 px-4 mb-3">
+                            <h5 class="m-0">No Results Found..</h5>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                    {% include "Blog/includes/Pagination.html" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- News With Sidebar End -->
+
+{% endblock content %}

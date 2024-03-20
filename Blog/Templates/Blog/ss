@@ -1,0 +1,21 @@
+ blog ={
+    'Education':[
+    [cate,title,created_at,slug,img,author]
+    [cate,title,created_at,slug,img,author]
+    [cate,title,created_at,slug,img,author]
+    [cate,title,created_at,slug,img,author]
+    ]
+    'Technology':[]
+    'Entertainment':[
+        [cate,title,created_at,slug,img,author]
+    ]
+    'Sports':[]
+ }
+
+
+ [cate,title,created_at,slug,img,author]
+ [cate,title,created_at,slug,img,author]
+ [cate,title,created_at,slug,img,author]
+ [cate,title,created_at,slug,img,author]
+ [cate,title,created_at,slug,img,author]
+ [cate,title,created_at,slug,img,author]

@@ -1,0 +1,69 @@
+{% extends "Register_Base.html" %}
+
+{% block title %}
+CLASSROOM | REGISTER
+{% endblock title %}
+
+{% block content %}
+{% load static %}
+
+<!-- Contact Start -->
+<div class="container-fluid py-5">
+    <div class="container py-2">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-7">
+                <div class="contact-form bg-light mb-3" style="padding: 30px;">
+                    <div class="text-center">
+                        <h1>Register</h1>
+                        <p >Enter the valid details </p>
+                    </div>
+                    <div id="success">
+                        {% include "includes/Blog_Messages.html" %}
+                    </div>
+                    <form name="sentMessage" method="POST" action="{% url 'Do-Register' %}">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="control-group">
+                                    <input type="text" class="form-control p-4" id="Fname" name="Fname" placeholder="First Name" required="required" data-validation-required-message="Please enter your First name" />
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="control-group">
+                                    <input type="text" class="form-control p-4" id="Lname" name="Lname" placeholder="Last Name" required="required" data-validation-required-message="Please enter your Last Name" />
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <input type="email" class="form-control p-4" id="Email" name="Email" placeholder="Email" required="required" data-validation-required-message="Please enter your Email" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <input type="text" class="form-control p-4" id="Username" name="Username" placeholder="Username" required="required" data-validation-required-message="Please enter your Username" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <input type="password" class="form-control p-4" id="Password" name="Password" placeholder="Password" required="required" data-validation-required-message="Please enter your Password" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <input type="password" class="form-control p-4" id="Cpassword" name="Cpassword" placeholder="Confirm Password" required="required" data-validation-required-message="Please enter your Confirm Password" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-primary rounded font-weight-semi-bold px-4" style="height: 50px;" type="submit" id="sendMessageButton">Register</button>
+                        </div>
+                        <div class="text-center mt-3">
+                            <p>Already registered ? <a href="{% url 'User-Login' %}">Login</a> </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact End -->
+
+{% endblock content %}

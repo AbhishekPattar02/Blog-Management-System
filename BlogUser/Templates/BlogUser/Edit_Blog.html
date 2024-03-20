@@ -1,0 +1,82 @@
+{% extends "Blog_Base.html" %}
+
+{% block title %}
+CLASSROOM | EDIT BLOG
+{% endblock title %}
+
+{% block content %}
+{% load static %}
+<!-- Breadcrumb Start -->
+<div class="container-fluid">
+    <div class="container">
+        <nav class="breadcrumb bg-transparent m-0 p-0">
+            <a class="breadcrumb-item" href="{% url 'Blog_Home' %}">Home</a>
+            <span class="breadcrumb-item active">Edit Blog</span>
+        </nav>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+
+
+<!-- Contact Start -->
+<div class="container-fluid py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="bg-light mb-3" style="padding: 30px;">
+                    {% include "BlogUser/includes/sidebar.html" %}
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="contact-form bg-light mb-3" style="padding: 30px;">
+                    <div id="success">
+                        {% include "includes/Blog_Messages.html" %}
+                    </div>
+                    <div class="text-center mb-4">
+                        <h3><strong>Edit:</strong> {{Blog.title}}</h3>
+                    </div><hr>
+                    <form name="sentMessage" method="POST" action="{% url 'Update-Blog' Blog.slug %}" enctype="multipart/form-data" novalidate="novalidate">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="control-group">
+                                    <label>Blog Image</label>
+                                    <input type="file" class="form-control " name="Header_img" />
+                                    <p class="help-block text-danger mt-1">Select Only If want to change.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="control-group">
+                                    <label>Blog Category</label>
+                                    <select class="form-control" name="category" required="required" value="{{Blog.category}}" aria-label="Default select example">
+                                        <option >Select Category</option>
+                                        {% for i in category %}
+                                        <option value="{{ i.id }}" >{{i.title}}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label>Blog Title</label>
+                            <input type="text" class="form-control p-4" value="{{Blog.title}}" name="Title" placeholder="Enter Blog Title" required="required" data-validation-required-message="Please enter a Blog Title" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <label>Blog Details</label>
+                            <textarea class="form-control" rows="15" name="Blog_Detail" placeholder="Enter Blog Details" required="required" data-validation-required-message="Please enter Blog Details">{{Blog.description}}</textarea>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary font-weight-semi-bold px-4" style="height: 50px;" type="submit" id="sendMessageButton">Update Blog</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact End -->
+
+{% endblock content %}

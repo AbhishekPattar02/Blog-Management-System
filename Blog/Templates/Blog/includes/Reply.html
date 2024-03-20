@@ -1,0 +1,36 @@
+{% load static %}
+<!-- Comment List Start -->
+<div class="bg-light mb-3" style="padding: 30px;">
+    <h3 class="mb-4">3 Comments</h3>
+    {% if comments %}
+    {% for i in comments %}
+    <div class="media mb-4">
+        <div class="media-body">
+            <h6>{{i.username}}&nbsp;&nbsp;<small><i>{{i.created_at |date:"d M Y"}}</i></small></h6>
+            <p>{{i.message}}</p>
+
+            {% if i.relies.all %}
+            {% for j in i.relies.all %}
+            <div class="media mt-4" style="margin-left : 20px;">
+                <div class="media-body">
+                    <h6>{{j.username}}&nbsp;&nbsp;<small><i>{{j.created_at |date:"d M Y"}}</i></small></h6>
+                    <p>{{j.message}}</p>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            <form method="POST" action="?action={{i.id}}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-sm btn-outline-secondary">Reply</button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+    
+    {% else %}
+    <p>No Comments Yet.</p>
+    {% endif %}
+    
+</div>
+<!-- Comment List End -->

@@ -1,0 +1,103 @@
+{% extends "Blog_Base.html" %}
+
+{% block title %}
+CLASSROOM | HOME
+{% endblock title %}
+
+{% block content %}
+{% load static %}
+<!-- Main News Slider Start -->
+<div class="container-fluid py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="owl-carousel owl-carousel-2 carousel-item-1 position-relative mb-3 mb-lg-0">
+                    {% for i in latest_blog|slice:":3" %}
+                    <div class="position-relative overflow-hidden" style="height: 435px;">
+                        <img class="img-fluid h-100" src="{{i.header_image.url}}" style="object-fit: cover;">
+                        <div class="overlay">
+                            <div class="mb-1">
+                                <a class="text-white" href="{% url 'Blog-List' i.category.slug %}">{{i.category}}</a>
+                                <span class="px-2 text-white">/</span>
+                                <a class="text-white">{{i.created_at|date:"d M Y"}}</a>
+                            </div>
+                            <a class="h2 m-0 text-white font-weight-bold" href="{% url 'Blog-Details' i.slug %}">{{i.title}}</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
+                    <h3 class="m-0">Categories</h3>
+                </div>
+                {% for i in Categories %}
+                <div class="position-relative overflow-hidden mb-3" style="height: 80px;">
+                    <img class="img-fluid w-100 h-100" src="{{i.back_img.url}}" style="object-fit: cover;">
+                    <a href="" class="overlay align-items-center justify-content-center h4 m-0 text-white text-decoration-none">
+                        {{i.title}}
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Main News Slider End -->
+
+<!-- Featured News Slider Start -->
+<div class="container-fluid py-3">
+    <div class="container">
+        <div class="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
+            <h3 class="m-0">Latest</h3>
+            <a class="text-secondary font-weight-medium text-decoration-none" href="{% url 'Blog-Latest' %}">View All</a>
+        </div>
+        {% if latest_blog %}
+        <div class="owl-carousel owl-carousel-2 carousel-item-4 position-relative">
+            {% for i in latest_blog %}
+            {% include "Blog/includes/Slider_1.html" %}
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center py-2 px-4 mb-3">
+            <h3 class="m-0">No Blogs Available</h3>
+        </div>
+        {% endif %}
+    </div>
+</div>
+</div>
+<!-- Featured News Slider End -->
+
+
+<!-- Category News Slider Start -->
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            {% for key,values in category_Blog.items %}
+            <div class="col-lg-6 py-3">
+                <div class="bg-light py-2 px-4 mb-3">
+                    <h3 class="m-0">{{key}}</h3>
+                </div>
+                {% if values %}
+                <div class="owl-carousel owl-carousel-3 carousel-item-2 position-relative">
+                    {% for i in values %}
+                        {% include "Blog/includes/Slider_2.html" %}  
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="bg-light text-center" style="height:300px; padding-top:25%">
+                    <h5 class="m-0">No Blogs Available</h5>
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</div>
+<!-- Category News Slider End -->
+
+
+
+
+{% endblock content %}

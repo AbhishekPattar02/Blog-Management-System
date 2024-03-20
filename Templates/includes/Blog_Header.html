@@ -1,0 +1,74 @@
+{% load static %}
+{% load active_link_tags %}
+<!-- Topbar Start -->
+<div class="container-fluid">
+    <div class="row align-items-center justify-content-between py-2 px-lg-5">
+        <div class="col-lg-4">
+            <a href="" class="navbar-brand d-none d-lg-block">
+                <h1 class="m-0 display-5 text-uppercase"><span class="text-primary">Class</span>Room</h1>
+            </a>
+        </div>
+        {% if user.is_authenticated %}
+        <div class="col-lg-4">
+            <a href="" class="navbar-brand d-none d-lg-block">
+                <h4 class="m-0 display-5 text-uppercase"><span class="text-primary">WELCOME ! &nbsp;&nbsp;</span>{{user.first_name}}&nbsp;&nbsp;{{user.last_name}}</h4>
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+<!-- Topbar End -->
+
+<!-- Navbar Start -->
+<div class="container-fluid p-0 mb-3">
+    <nav class="navbar navbar-expand-lg bg-light navbar-light py-2 py-lg-0 px-lg-5">
+        <a href="" class="navbar-brand d-block d-lg-none">
+            <h1 class="m-0 display-5 text-uppercase"><span class="text-primary">News</span>Room</h1>
+        </a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3" id="navbarCollapse">
+            <div class="navbar-nav mr-auto py-0">
+                <a href="{% url 'Blog_Home' %}" class="nav-item nav-link {% if request.path == '/' %}active{% endif %}">Home</a>
+                {% for category in Categories %}
+                    <a href="{% url 'Blog-List' category.slug %}" class="nav-item nav-link {% if 'Blog-List' in request.resolver_match.view_name and category.slug in request.path %}active{% endif %}">
+                        {{ category.title }}
+                    </a>
+                {% endfor %}
+                <a href="{% url 'Blog-Contact' %}" class="nav-item nav-link {% if request.path == '/Blog_Contact' %}active{% endif %}">Contact</a>
+            </div>
+            
+            <form method="GET" action="{% url 'Search-Blog' %}">
+            <div class="input-group ml-auto" style="width: 100%; max-width: 300px;">
+                <input type="text" name="query" class="form-control" placeholder="Keyword">
+                <div class="input-group-append">
+                    <button class="input-group-text text-secondary"><i
+                            class="fa fa-search"></i></button>
+                </div>
+            </div>
+            </form>
+            {% if user.is_authenticated %}
+            <div class="nav-item dropdown dropstart ml-3" style="width:110px;">
+                {% if user.profile_pic == ""  %}
+                <img class="img-fluid rounded-circle dropdown-toggle" src="{% static 'img/user_profile.jpg' %}" id ="dropdownMenuButton" data-toggle="dropdown" style="width: 40px; height: 40px;" alt="">
+                {% else %}
+                <img class="img-fluid rounded-circle dropdown-toggle" src="{{ user.profile_pic.url }}" id ="dropdownMenuButton" data-toggle="dropdown" style="width: 40px; height: 40px;" alt="">
+                {% endif %}
+                <div class="dropdown-menu " style="width:5px;" aria-labelledby="dropdownMenuButton">
+                    <a href="{% url 'View-Profile' %}" class="dropdown-item">Profile</a>
+                    <a href="{% url 'Add-Blog' %}" class="dropdown-item">Add Blog</a>
+                    <a href="{% url 'View-Blog' %}" class="dropdown-item">View Blog</a>
+                    <a href="{% url 'User-Logout' %}" class="dropdown-item">Logout</a>
+                </div>
+            </div>
+            {% else %}
+            <div class="navbar-nav ml-3">
+                <a href="{% url 'User-Login' %}" class="nav-item nav-link ">Login</a>
+                <a href="{% url 'User-Register' %}" class="nav-item nav-link">Register</a>
+            </div>
+            {% endif %}
+        </div>
+    </nav>
+</div>
+<!-- Navbar End -->

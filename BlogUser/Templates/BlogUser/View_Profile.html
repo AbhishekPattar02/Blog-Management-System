@@ -1,0 +1,86 @@
+{% extends "Blog_Base.html" %}
+
+{% block title %}
+CLASSROOM | MY PROFILE
+{% endblock title %}
+
+{% block content %}
+{% load static %}
+
+<!-- Breadcrumb Start -->
+<div class="container-fluid">
+    <div class="container">
+        <nav class="breadcrumb bg-transparent m-0 p-0">
+            <a class="breadcrumb-item" href="{% url 'Blog_Home' %}">Home</a>
+            <span class="breadcrumb-item active">View Profile</span>
+        </nav>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+
+<!-- Contact Start -->
+<div class="container-fluid py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="bg-light mb-3" style="padding: 30px;">
+                    {% include "BlogUser/includes/sidebar.html" %}
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="contact-form bg-light mb-3" style="padding: 30px;">
+                    <div id="success"></div>
+                    {% include "includes/Blog_Messages.html" %}
+                    <div class="text-center mb-4">
+                        <h1>MY PROFILE</h1>
+                    </div><hr>
+                    <form name="sentMessage" method="POST" action="{% url 'Update-Profile' %}" enctype="multipart/form-data" novalidate="novalidate">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="control-group">
+                                    <label>First Name</label>
+                                    <input type="text" class="form-control p-4" id="fname" name="First_name"  value= "{{user.first_name}}" required="required" data-validation-required-message="Please enter your First Name" />
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="control-group">
+                                    <label>Last Name</label>
+                                    <input type="text" class="form-control p-4" id="lname" name="Last_name" value= "{{user.last_name}}" required="required" data-validation-required-message="Please enter First Name" />
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control p-4" id="email" name="Email" value= "{{user.email}}"  disabled required="required" data-validation-required-message="Please enter your Email" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <label>Username</label>
+                            <input type="text" class="form-control p-4" id="username" name="Username" value= "{{user.username}}" disabled required="required" data-validation-required-message="Please enter your Username" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <label>Password</label>
+                            <input type="password" class="form-control p-4" id="password" name="Password" placeholder="Fill only if want to change" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <label>Profile Image</label>
+                            <input type="file" class="form-control " id="profile_pic" name="Profile_pic"   />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary font-weight-semi-bold px-4" style="height: 50px;" type="submit" id="sendMessageButton">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact End -->
+
+{% endblock content %}

@@ -1,0 +1,14 @@
+{% load static %}
+<div class="col-lg-4">
+    <div class="position-relative mb-3">
+        <img class="img-fluid w-100" src="{{i.header_image.url}}" style="object-fit: cover; height: 200px;">
+        <div class="overlay position-relative bg-light">
+            <div class="mb-2" style="font-size: 14px;">
+                <a href="{% url 'Blog-List' i.category.slug %}">{{i.category}}</a>
+                <span class="px-1">/</span>
+                <span>{{i.created_at|date:"d M Y"}}</span>
+            </div>
+            <a class="h4" href="{% url 'Blog-Details' i.slug %}">{{i.title|slice:":20"}}...</a>
+        </div>
+    </div>
+</div>

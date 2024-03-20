@@ -1,0 +1,49 @@
+{% extends "Register_Base.html" %}
+
+{% block title %}
+CLASSROOM | LOGIN
+{% endblock title %}
+
+{% block content %}
+{% load static %}
+
+
+
+<!-- Contact Start -->
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="row align-items-center justify-content-center py-5">
+            <div class="col-md-5">
+                <div class="contact-form bg-light mb-3" style="padding: 30px;">
+                    <div id="success">
+                        {% include "includes/Blog_Messages.html" %}
+                    </div>
+                    <div class="text-center">
+                        <h1>Login</h1>
+                        <p >Access to Blog </p>
+                    </div>
+                    <form name="sentMessage" method="POST" action="{% url 'Do-Login' %}" novalidate="novalidate">
+                        {% csrf_token %}
+                        <div class="control-group">
+                            <input type="email" class="form-control p-4" id="Username" name="Username" placeholder="Username" required="required" data-validation-required-message="Please enter a Username" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <input type="password" class="form-control p-4" id="Password" name="Password" placeholder="Password" required="required" data-validation-required-message="Please enter a Password" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-primary rounded font-weight-semi-bold px-4" style="height: 50px;" type="submit" id="sendMessageButton">Login</button>
+                        </div>
+                    </form>
+                    <div class="text-center mt-3">
+                        <p>Don't have an account? <a href="{% url 'User-Register' %}">Create</a> </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact End -->
+
+{% endblock content %}

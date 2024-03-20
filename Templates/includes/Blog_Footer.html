@@ -1,0 +1,49 @@
+<!-- Footer Start -->
+<div class="container-fluid bg-light pt-5 px-sm-3 px-md-5">
+    <div class="row">
+        <div class="col-lg-3 col-md-6 mb-5">
+            <a href="index.html" class="navbar-brand">
+                <h1 class="mb-2 mt-n2 display-5 text-uppercase"><span class="text-primary">Class</span>Room</h1>
+            </a>
+            <p>"Empower your online presence with our intuitive Blog Management System. Effortlessly create, organize, and share captivating content. Streamline your blogging experience for a seamless and engaging digital platform."
+            </p>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-5">
+            <h4 class="font-weight-bold mb-4">Categories</h4>
+            <div class="d-flex flex-wrap m-n1">
+                {% for i in Categories %}
+                <a href="{% url 'Blog-List' i.slug %}" class="btn btn-sm btn-outline-secondary m-1">{{i.title}}</a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-5">
+            <h4 class="font-weight-bold mb-4">Members</h4>
+            <div class="d-flex flex-wrap m-n1">
+                <a href="" class="btn btn-sm btn-outline-secondary m-1">Abhishek Pattar</a>
+                <a href="" class="btn btn-sm btn-outline-secondary m-1">Yash Prasad</a>
+                <a href="" class="btn btn-sm btn-outline-secondary m-1">Ashutosh </a>
+                <a href="" class="btn btn-sm btn-outline-secondary m-1">Kajal Pattar</a>
+                <a href="" class="btn btn-sm btn-outline-secondary m-1">Varsha Binekar</a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-5">
+            <h4 class="font-weight-bold mb-4">Quick Links</h4>
+            <div class="d-flex flex-column justify-content-start">
+                <a class="text-secondary mb-2" href="{% url 'Blog_Home' %}"><i class="fa fa-angle-right text-dark mr-2"></i>Home</a>
+                {% for i in Categories %}
+                <a class="text-secondary mb-2" href="{% url 'Blog-List' i.slug %}"><i class="fa fa-angle-right text-dark mr-2"></i>{{i.title}}</a>
+                {% endfor %}
+                <a class="text-secondary" href="{% url 'Blog-Contact' %}"><i class="fa fa-angle-right text-dark mr-2"></i>Contact</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid py-4 px-sm-3 px-md-5">
+    <p class="m-0 text-center">
+        &copy; <a class="font-weight-bold" href="#">CLASSROOM</a>. All Rights Reserved. 
+        
+        <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+        Designed by <a class="font-weight-bold" href="https://htmlcodex.com">HTML Codex</a>
+    </p>
+</div>
+<!-- Footer End -->

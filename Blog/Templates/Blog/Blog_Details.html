@@ -1,0 +1,62 @@
+{% extends "Blog_Base.html" %}
+
+{% block title %}
+CLASSROOM | {{Blog.title|upper}}
+{% endblock title %}
+
+{% block content %}
+{% load static %}
+<!-- Breadcrumb Start -->
+<div class="container-fluid">
+    <div class="container">
+        <nav class="breadcrumb bg-transparent m-0 p-0">
+            <a class="breadcrumb-item" href="{% url 'Blog_Home' %}">Home</a>
+            <a class="breadcrumb-item" href="{% url 'Blog-List' Blog.category.slug %}">{{Blog.category}}</a>
+            <span class="breadcrumb-item active">{{Blog.title}}</span>
+        </nav>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+
+
+<!-- News With Sidebar Start -->
+<div class="container-fluid py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- News Detail Start -->
+                <div class="position-relative mb-3">
+                    <img class="img-fluid w-100" src="{{Blog.header_image.url}}" style="object-fit: cover;">
+                    <div class="overlay position-relative bg-light">
+                        <div class="mb-3">
+                            <a href="{% url 'Blog-List' Blog.category.slug %}">{{Blog.category}}</a>
+                            <span class="px-1">/</span>
+                            <span>{{Blog.created_at|date:"d M Y"}}</span>
+                        </div>
+                        <div>
+                            <h3 class="mb-3">{{Blog.title}}</h3>
+                            <p>{{Blog.description}}</p>
+                            
+                        </div>
+                    </div>
+                </div>
+                <!-- News Detail End -->
+            </div>
+            <div class="col-md-5">
+                {% include "Blog/includes/Reply.html" %}
+            </div>
+            <div class="col-md-7">
+                {% if action is None %}
+                {% include "Blog/includes/Comments_Form.html" %}
+                {% else %}
+                {% include "Blog/includes/Reply_Form.html" %}
+                {% endif %}
+                
+            </div>
+            
+        </div>
+    </div>
+</div>
+</div>
+<!-- News With Sidebar End -->
+{% endblock content %}
